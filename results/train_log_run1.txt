@@ -1,0 +1,32 @@
+baseline {'n': 60, 'json_valid': 0.0, 'chief_complaint_acc': 0.0, 'icd10_f1': 0.0, 'medications_f1': 0.0, 'exact_match': 0.0}
+step 0 loss 0.8642
+step 25 loss 0.1876
+step 50 loss 0.1128
+step 75 loss 0.0996
+step 100 loss 0.0914
+step 125 loss 0.0830
+lora {'n': 60, 'json_valid': 1.0, 'chief_complaint_acc': 1.0, 'icd10_f1': 0.536, 'medications_f1': 1.0, 'exact_match': 0.167}
+Traceback (most recent call last):
+  File "/Users/marklight/miniconda/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/Users/marklight/miniconda/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/Users/marklight/Documents/portfolio-2026-09/lora-clinical-extraction/src/train_eval.py", line 109, in <module>
+    main()
+  File "/Users/marklight/Documents/portfolio-2026-09/lora-clinical-extraction/src/train_eval.py", line 103, in main
+    (ROOT / "results" / "report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False))
+  File "/Users/marklight/miniconda/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/marklight/miniconda/lib/python3.10/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/Users/marklight/miniconda/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/Users/marklight/miniconda/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/Users/marklight/miniconda/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/Users/marklight/miniconda/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Users/marklight/miniconda/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type set is not JSON serializable

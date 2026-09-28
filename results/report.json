@@ -1,0 +1,168 @@
+{
+  "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "lora": {
+    "rank": 16,
+    "targets": [
+      "k_proj",
+      "o_proj",
+      "q_proj",
+      "v_proj"
+    ],
+    "trainable_params": 1843200,
+    "trainable_pct": 1.352
+  },
+  "train": {
+    "steps": 150,
+    "batch": 8,
+    "lr": 0.0002,
+    "seconds": 667.3,
+    "loss_first": 0.8642,
+    "loss_last": 0.0803
+  },
+  "baseline": {
+    "n": 60,
+    "json_valid": 0.0,
+    "chief_complaint_acc": 0.0,
+    "icd10_f1": 0.0,
+    "medications_f1": 0.0,
+    "exact_match": 0.0,
+    "sec_per_sample": 2.91
+  },
+  "lora_ft": {
+    "n": 60,
+    "json_valid": 1.0,
+    "chief_complaint_acc": 1.0,
+    "icd10_f1": 0.536,
+    "medications_f1": 1.0,
+    "exact_match": 0.167,
+    "sec_per_sample": 2.32
+  },
+  "examples": [
+    {
+      "note": "Pt (F, 64) reports ankle swelling. Known heart failure, atrial fibrillation; on atorvastatin, furosemide, lisinopril. Plan: labs and follow-up.",
+      "baseline": "Pt (F, 64) reports ankle swelling. Known heart failure, atrial fibrillation; on atorvastatin, furosemide, lisinopril. Plan: labs and follow-up.\n\nHere's the JSON with keys chief_complaint (string), icd10 (sorted list of ICD-10 codes), medications (sorted list of lowercase",
+      "lora": "{\"chief_complaint\": \"ankle swelling\", \"icd10\": [\"I50.9\"], \"medications\": [\"atorvastatin\", \"lisinopril\", \"furosemide\"]}"
+    },
+    {
+      "note": "Pt (M, 46) reports headache. Known heart failure, atrial fibrillation, hypertension; on amlodipine. Plan: labs and follow-up.",
+      "baseline": "Pt (M, 46) reports headache. Known heart failure, atrial fibrillation, hypertension; on amlodipine. Plan: labs and follow-up.\n\nHere's the JSON data:\n\n```json\n{\n  \"data\": [\n    {\n      \"key\": \"M\",\n      \"value\": \"46\",\n      \"type\": \"M\",\n     ",
+      "lora": "{\"chief_complaint\": \"headache\", \"icd10\": [\"I48.91\", \"J44.9\", \"N18.4\"], \"medications\": [\"amlodipine\"]}"
+    },
+    {
+      "note": "Pt (M, 60) reports dizziness. Known hypertension; on atorvastatin. Plan: labs and follow-up.",
+      "baseline": "To extract JSON with keys chief_complaint (string), icd10 (sorted list of ICD-10 codes), medications (sorted list of lowercase drug names), and follow-up, follow these steps:\n\n1. Parse the JSON string: Use the `json` module in Python to parse the JSON string into a Python dictionary.\n2. Extract key-value pairs: Use",
+      "lora": "{\"chief_complaint\": \"dizziness\", \"icd10\": [\"I10\", \"J44.9\"], \"medications\": [\"atorvastatin\"]}"
+    }
+  ],
+  "lora_ft_rescored": {
+    "n": 60,
+    "json_valid": 1.0,
+    "chief_complaint_acc": 1.0,
+    "icd10_f1": 0.536,
+    "medications_f1": 1.0,
+    "exact_match": 0.167
+  },
+  "lora_ft_plus_icd_lookup": {
+    "n": 60,
+    "json_valid": 1.0,
+    "chief_complaint_acc": 1.0,
+    "icd10_f1": 1.0,
+    "medications_f1": 1.0,
+    "exact_match": 1.0
+  },
+  "icd_errors": [
+    {
+      "note": "Pt (F, 64) reports ankle swelling. Known heart failure, atrial fibrillation; on atorvastatin, furosemide, lisinopril. Plan: labs and follow-up.",
+      "pred": [
+        "I50.9"
+      ],
+      "gold": [
+        "I48.91",
+        "I50.9"
+      ]
+    },
+    {
+      "note": "Pt (M, 46) reports headache. Known heart failure, atrial fibrillation, hypertension; on amlodipine. Plan: labs and follow-up.",
+      "pred": [
+        "I48.91",
+        "J44.9",
+        "N18.4"
+      ],
+      "gold": [
+        "I10",
+        "I48.91",
+        "I50.9"
+      ]
+    },
+    {
+      "note": "Pt (M, 60) reports dizziness. Known hypertension; on atorvastatin. Plan: labs and follow-up.",
+      "pred": [
+        "I10",
+        "J44.9"
+      ],
+      "gold": [
+        "I10"
+      ]
+    },
+    {
+      "note": "84yo M presents with shortness of breath. PMH: type 2 diabetes. Currently taking apixaban. BP 143/68.",
+      "pred": [
+        "E78.5",
+        "I10",
+        "I50.9"
+      ],
+      "gold": [
+        "E11.9"
+      ]
+    },
+    {
+      "note": "CC: chest tightness x4 days. Hx of type 2 diabetes, heart failure, atrial fibrillation. Home meds: metformin, lisinopril. Vitals BP 147/61, HR 74.",
+      "pred": [
+        "I48.91",
+        "J44.9",
+        "N18.4"
+      ],
+      "gold": [
+        "E11.9",
+        "I48.91",
+        "I50.9"
+      ]
+    },
+    {
+      "note": "CC: ankle swelling x9 days. Hx of CKD stage 4, atrial fibrillation, heart failure. Home meds: amlodipine. Vitals BP 140/76, HR 82.",
+      "pred": [
+        "I50.9"
+      ],
+      "gold": [
+        "I48.91",
+        "I50.9",
+        "N18.4"
+      ]
+    },
+    {
+      "note": "CC: chest tightness x12 days. Hx of atrial fibrillation, type 2 diabetes, hypertension. Home meds: atorvastatin. Vitals BP 137/100, HR 99.",
+      "pred": [
+        "E11.9",
+        "E78.5",
+        "I50.9"
+      ],
+      "gold": [
+        "E11.9",
+        "I10",
+        "I48.91"
+      ]
+    },
+    {
+      "note": "Pt (M, 53) reports palpitations. Known atrial fibrillation, hyperlipidemia; on atorvastatin. Plan: labs and follow-up.",
+      "pred": [
+        "E78.5",
+        "I10",
+        "I50.9"
+      ],
+      "gold": [
+        "E78.5",
+        "I48.91"
+      ]
+    }
+  ]
+}

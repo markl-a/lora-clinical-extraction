@@ -1,0 +1,47 @@
+baseline {'n': 60, 'json_valid': 0.0, 'chief_complaint_acc': 0.0, 'icd10_f1': 0.0, 'medications_f1': 0.0, 'exact_match': 0.0}
+step 0 loss 0.8642
+step 25 loss 0.1876
+step 50 loss 0.1128
+step 75 loss 0.0996
+step 100 loss 0.0914
+step 125 loss 0.0830
+lora {'n': 60, 'json_valid': 1.0, 'chief_complaint_acc': 1.0, 'icd10_f1': 0.536, 'medications_f1': 1.0, 'exact_match': 0.167}
+{
+ "lora": {
+  "rank": 16,
+  "targets": [
+   "k_proj",
+   "o_proj",
+   "q_proj",
+   "v_proj"
+  ],
+  "trainable_params": 1843200,
+  "trainable_pct": 1.352
+ },
+ "train": {
+  "steps": 150,
+  "batch": 8,
+  "lr": 0.0002,
+  "seconds": 667.3,
+  "loss_first": 0.8642,
+  "loss_last": 0.0803
+ },
+ "baseline": {
+  "n": 60,
+  "json_valid": 0.0,
+  "chief_complaint_acc": 0.0,
+  "icd10_f1": 0.0,
+  "medications_f1": 0.0,
+  "exact_match": 0.0,
+  "sec_per_sample": 2.91
+ },
+ "lora_ft": {
+  "n": 60,
+  "json_valid": 1.0,
+  "chief_complaint_acc": 1.0,
+  "icd10_f1": 0.536,
+  "medications_f1": 1.0,
+  "exact_match": 0.167,
+  "sec_per_sample": 2.32
+ }
+}
